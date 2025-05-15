@@ -34,10 +34,10 @@ const StudentNotices = () => {
 
   return (
     <div style={{ maxWidth: 700, margin: '2rem auto', color: '#eee', fontFamily: 'sans-serif' }}>
-      <h2 style={{ textAlign: 'center', marginBottom: '1rem' }}>Notices</h2>
+      <h2 style={{ textAlign: 'center', marginBottom: '1rem', color: '#000000' }}>Notices</h2>
       {error && <p style={{ color: 'salmon' }}>{error}</p>}
       {notices.length === 0
-        ? <p>No notices available</p>
+        ? <p style={{ textAlign: 'center', color: '#000000' }}>No notices available</p>
         : notices.map(n => (
             <div
               key={n.id}

@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, SignIn, SignUp, useUser } from '@clerk/clerk-react';
@@ -10,7 +9,7 @@ import MyLectures from './pages/MyLectures';
 import UploadLecture from './pages/UploadLecture';
 import TeacherVideos from './pages/TeacherVideos';
 import StudentVideos from './pages/StudentVideos';
-import HomeRedirect from './pages/HomeRedirect';
+import LandingPage from './components/LandingPage'; // Newly imported
 import QuizUpload from './pages/QuizUpload';
 import NoticeForm from './pages/NoticeForm';
 import StudentNotices from './pages/StudentNotices.jsx';
@@ -75,7 +74,7 @@ const App = () => {
       </header>
       <main style={styles.main}>
         <Routes>
-          <Route path="/" element={<HomeRedirect />} />
+          <Route path="/" element={<LandingPage />} /> {/* Updated to LandingPage */}
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route
             path="/teacher"
@@ -112,7 +111,6 @@ const App = () => {
   );
 };
 
-// Responsive styles (pure JS object)
 const styles = {
   loading: {
     textAlign: 'center',
