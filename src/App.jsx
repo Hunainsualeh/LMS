@@ -14,7 +14,7 @@ import QuizUpload from './pages/QuizUpload';
 import NoticeForm from './pages/NoticeForm';
 import StudentNotices from './pages/StudentNotices.jsx';
 import StudentQuizzes from './pages/StudentQuizzes.jsx';
-import StudentClasses from './pages/StudentClasses.jsx';
+
 
 const App = () => {
   const { user, isLoaded } = useUser();
@@ -53,7 +53,7 @@ const App = () => {
                     <NavLink to="/student/videos" style={styles.link}>Videos</NavLink>
                     <NavLink to="/student/notices" style={styles.link}>Notices</NavLink>
                     <NavLink to="/student/quizzes" style={styles.link}>Quizzes</NavLink>
-                    <NavLink to="/student/classes" style={styles.link}>Classes</NavLink>
+                  
                   </>
                 )}
                 <UserButton />
@@ -101,7 +101,7 @@ const App = () => {
             <Route path="videos" element={<StudentVideos />} />
             <Route path="notices" element={<StudentNotices />} />
             <Route path="quizzes" element={<StudentQuizzes />} />
-            <Route path="classes" element={<StudentClasses />} />
+          
           </Route>
           <Route path="/sign-in/*" element={<SignIn routing="path" path="/sign-in" />} />
           <Route path="/sign-up/*" element={<SignUp routing="path" path="/sign-up" />} />

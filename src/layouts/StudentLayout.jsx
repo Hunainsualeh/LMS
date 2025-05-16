@@ -18,8 +18,17 @@ const StudentLayout = () => {
   return (
     <div style={styles.container}>
       {isMobile && (
-        <button onClick={toggleMenu} style={styles.menuButton}>
-          ☰
+        <button
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+          style={{
+            ...styles.menuButton,
+            ...(isOpen ? styles.menuButtonActive : {}),
+          }}
+        >
+          <div style={styles.burgerLine} />
+          <div style={styles.burgerLine} />
+          <div style={styles.burgerLine} />
         </button>
       )}
 
@@ -32,12 +41,21 @@ const StudentLayout = () => {
                 top: 0,
                 left: 0,
                 height: '100vh',
-                transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
-                transition: 'transform 0.3s ease',
-                zIndex: 1000,
+                width: '75vw',
+                maxWidth: 300,
+                backdropFilter: 'blur(12px)',
+                backgroundColor: 'rgba(144, 202, 249, 0.85)',
+                boxShadow: '0 8px 24px rgba(13, 71, 161, 0.3)',
+                borderRadius: '0 0 8px 0',
+                transform: isOpen ? 'translateX(0)' : 'translateX(-110%)',
+                transition: 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+                zIndex: 1100,
               }
-            : {}),
+            : {
+                boxShadow: '2px 0 10px rgba(13, 71, 161, 0.1)',
+              }),
         }}
+        aria-label="Student navigation"
       >
         <h2 style={styles.heading}>Student Portal</h2>
         <ul style={styles.navList}>
@@ -65,6 +83,7 @@ const StudentLayout = () => {
       <main
         style={styles.main}
         onClick={() => isMobile && isOpen && toggleMenu()}
+        tabIndex={-1}
       >
         <Outlet />
       </main>
@@ -75,36 +94,56 @@ const StudentLayout = () => {
 const styles = {
   container: {
     display: 'flex',
-    flexWrap: 'wrap',
     minHeight: '100vh',
-    backgroundColor: '#f0f4f8',
+    backgroundColor: '#f7f9fc',
+    fontFamily: "'Inter', sans-serif",
+    color: '#0d47a1',
   },
   menuButton: {
     position: 'fixed',
-    top: 16,
-    left: 16,
-    fontSize: 24,
-    background: 'none',
+    top: 20,
+    left: 20,
+    width: 32,
+    height: 24,
+    background: 'transparent',
     border: 'none',
     cursor: 'pointer',
-    zIndex: 1100,
-    color: '#0d47a1',
+    padding: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    zIndex: 1200,
+    transition: 'transform 0.3s ease',
+  },
+  menuButtonActive: {
+    transform: 'rotate(90deg)',
+  },
+  burgerLine: {
+    width: 32,
+    height: 4,
+    backgroundColor: '#0d47a1',
+    borderRadius: 2,
+    transition: 'background-color 0.3s ease',
   },
   sidebar: {
     flex: '0 0 250px',
-    maxWidth: '250px',
+    maxWidth: 250,
     width: '100%',
-    padding: '2rem 1.5rem',
+    padding: '2.5rem 2rem',
     background: 'linear-gradient(135deg, #e3f2fd, #90caf9)',
-    boxShadow: '2px 0 5px rgba(0,0,0,0.1)',
+    borderRight: '1px solid rgba(13, 71, 161, 0.1)',
+    display: 'flex',
+    flexDirection: 'column',
   },
   heading: {
-    marginBottom: '1.5rem',
-    color: '#0d47a1',
-    fontSize: '1.75rem',
+    marginBottom: '2rem',
+    fontSize: '1.875rem',
     fontWeight: 700,
     textTransform: 'uppercase',
-    letterSpacing: '1px',
+    letterSpacing: '2px',
+    color: '#0d47a1',
+    userSelect: 'none',
+    textShadow: '0 1px 2px rgba(0,0,0,0.1)',
   },
   navList: {
     listStyle: 'none',
@@ -112,27 +151,37 @@ const styles = {
     margin: 0,
     display: 'flex',
     flexDirection: 'column',
-    gap: '1rem',
+    gap: '1.25rem',
   },
   link: {
     display: 'block',
-    padding: '0.75rem 1.25rem',
-    borderRadius: '8px',
+    padding: '0.85rem 1.5rem',
+    borderRadius: '12px',
     color: '#1e3a8a',
     backgroundColor: 'transparent',
     textDecoration: 'none',
-    fontWeight: 400,
-    transition: 'background-color 0.3s ease',
+    fontWeight: 500,
+    fontSize: '1.125rem',
+    transition: 'all 0.3s ease',
+    boxShadow: 'inset 0 0 0 0 transparent',
   },
   active: {
     backgroundColor: '#bbdefb',
     color: '#0d47a1',
-    fontWeight: 600,
+    fontWeight: 700,
+    boxShadow:
+      '0 0 8px 2px rgba(13, 71, 161, 0.6), inset 0 0 10px 1px rgba(13, 71, 161, 0.3)',
   },
   main: {
     flex: '1 1 0',
-    padding: '2rem',
+    padding: '2.5rem 3rem',
     width: '100%',
+    backgroundColor: '#fff',
+    boxShadow: '0 0 30px rgba(0,0,0,0.03)',
+    borderRadius: 12,
+    margin: '2rem',
+    minHeight: 'calc(100vh - 4rem)',
+    overflowY: 'auto',
   },
 };
 
